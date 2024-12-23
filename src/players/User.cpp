@@ -137,6 +137,11 @@ void User::placeShips()
 			std::cout << e.what();
 			i--;
 		}
+		catch (OutOfBondsException &e)
+		{
+			std::cout << e.what();
+			i--;
+		}
 	}
 }
 
@@ -162,9 +167,20 @@ int User::getDamage()
 
 void User::placeShip(int index, std::pair<int, int> coords, Direction direction)
 {
-	auto &ship = shipManager[index];
-	this->field.SetBattleship(coords.second - 1, coords.first - 1, ship, direction);
-	this->field.OpenField();
+	try
+	{
+		auto &ship = shipManager[index];
+		this->field.SetBattleship(coords.second - 1, coords.first - 1, ship, direction);
+		this->field.OpenField();
+	}
+	catch (ShipNearAnotherException &e)
+	{
+		std::cout << e.what();
+	}
+	catch (OutOfBondsException &e)
+	{
+		std::cout << e.what();
+	}
 }
 
 //  User::useSkill(Player& player)

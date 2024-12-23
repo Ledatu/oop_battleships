@@ -14,10 +14,15 @@ Battleship &ShipManager::operator[](int n)
 
 ShipManager::ShipManager() {}
 ShipManager::ShipManager(std::vector<int> lengths)
-{
+{   
+    int count = 4;
     for (auto &length : lengths)
-    {
-        battleships.push_back(new Battleship(length));
+    {   
+        for (int i = 0; i < length; i++)
+        {
+            battleships.push_back(new Battleship(count));
+        }
+        count--;
     }
 }
 

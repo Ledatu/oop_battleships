@@ -8,14 +8,15 @@
 
 int main()
 {
-    auto bot = Bot(10, 10, {1, 2, 3, 4});
-    auto user = User(10, 10, {1, 2, 3, 4});
+    auto bot = Bot(10, 10, {1, 1, 1});
+    auto user = User(10, 10, {1, 1, 1});
+    std::cout << bot.getShipManager().GetNumberBattleships() << '\n';
 
     int countr = 1;
     int countm = 1;
     auto state = GameState(user, bot, countr, countm);
-    std::string filename = "/Users/kirillverdin/Downloads/oop_battleships/commands.json";
-    std::string settingsFileName = "/Users/kirillverdin/Downloads/oop_battleships/commands.json";
+    std::string filename = "/Users/ledatu/Documents/oop_battleships/save.json";
+    std::string settingsFileName = "/Users/ledatu/Documents/oop_battleships/commands.json";
     ConsoleDisplayer displayer;
     auto output = Output<ConsoleDisplayer>(displayer);
     InputHandler input;

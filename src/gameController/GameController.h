@@ -46,23 +46,28 @@ void GameController<Input, Displayer>::processUser()
 	bool flag = false;
 	std::pair<int, int> coords;
 	while (command != Commands::Quit)
-	{
+	{	
+		output.printMessage("Введите команду");
 		command = input.processCommandInput();
 		switch (command)
 		{
 		case Commands::UseAttack:
+			output.printMessage("Введите коордианты");
 			coords = input.processCoordinateInput();
 			this->game.getGameState().getUser().attack(*game.getCurrentEnemy(), coords.first, coords.second);
 			flag = true;
 			break;
 		case Commands::UseSave:
 			this->game.save();
+			output.printMessage("Игра была успешно сохранена!");
 			break;
 		case Commands::UseSkill:
 			this->game.getGameState().getUser().useSkill(*game.getCurrentEnemy());
 			break;
 		case Commands::UseLoad:
 			this->game.load();
+			output.printMessage("Игра была успешно загружена!");
+
 			break;
 		default:
 			output.printMessage("Unknown Command!");
@@ -86,7 +91,7 @@ void GameController<Input, Displayer>::placeShips()
 	}
 	auto &user = this->game.getGameState().getUser();
 	auto numShips = this->game.getGameState().getUser().getShipManager().GetNumberBattleships();
-
+	std::cout << ' ' << numShips << '\n';
 	for (size_t i = 0; i < numShips; i++)
 	{
 		this->game.notifyObservers(this->game.getGameState());

@@ -12,6 +12,7 @@ void Deserialization::from_json(ShipManager &shipManager, std::string key)
     }
     shipManager = ShipManager(shipLengths);
 
+    std::cout << shipManager.GetNumberBattleships() << "\n";
     for (size_t i = 0; i < shipManager.GetNumberBattleships(); i++)
     {
         std::string key = "ship" + std::to_string(i);
@@ -42,9 +43,7 @@ void Deserialization::from_json(Field &field, std::string key)
         {
             std::string key = "cell" + std::to_string(y) + std::to_string(x);
             FieldCell &cell = field[y][x];
-            cell.setIdBattleship(jf.at(key).at("idBattleShip"));
             cell.SetFieldCellState(FieldCellState(jf.at(key).at("state")));
-            cell.setIsHead(jf.at(key).at("isHead"));
         }
     }
 }
